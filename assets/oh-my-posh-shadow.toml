@@ -1,0 +1,73 @@
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
+
+[palette]
+  nix-shell = '#D81E5B'
+  #nix-shell = '#6B33A0'
+  shell = '#92D4FE'
+  path = '#303C68'
+
+[transient_prompt]
+  template = '~> '
+  foreground = 'p:shell'
+  background = 'transparent'
+  foreground_templates = [
+    '{{ if .Env.IN_NIX_SHELL }}p:nix-shell{{ end }}'
+  ]
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+force = true
+
+[[blocks]]
+newline = true
+type = 'prompt'
+alignment = 'left'
+
+  [[blocks.segments]]
+  type = 'shell'
+  style = 'powerline'
+  powerline_symbol = ''
+  foreground = 'black'
+  background = 'p:shell'
+  template = '{{if .Env.IN_NIX_SHELL}} nix-shell {{else}} {{.Shell}} {{end}}'
+  background_templates = [
+    '{{ if .Env.IN_NIX_SHELL }}p:nix-shell{{ end }}'
+  ]
+  foreground_templates = [
+    '{{ if .Env.IN_NIX_SHELL }}white{{ end }}'
+  ]
+
+  [[blocks.segments]]
+  type = 'text'
+  template = ' . '
+  style = 'plain'
+  foreground = 'transparent'
+  background = 'transparent'
+
+  [[blocks.segments]]
+  type = 'path'
+  template = '  {{ path .Path .Location }} '
+  style = 'powerline'
+  powerline_symbol = ''
+  foreground = 'white'
+  background = 'p:path'
+
+    [blocks.segments.properties]
+    style = 'folder'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+  [[blocks.segments]]
+  type = 'text'
+  style = 'plain'
+  foreground = 'p:shell'
+  foreground_templates = [
+    '{{if .Env.IN_NIX_SHELL}}p:nix-shell{{ end }}'
+  ]
+  template = '~>'
