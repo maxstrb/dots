@@ -34,6 +34,33 @@
           clear
           fastfetch
         }
+
+        def flake [
+          shell?: string
+          --edit (-e)
+          --command (-c): string
+        ] {
+          if $edit {
+            nvim ~/.nix-config/flakes/flake.nix
+          } else {
+            match $command {
+              null => {nix develop $"/home/maxag/.nix-config/flakes/#($shell)"}
+              _ => {nix develop $"/home/maxag/.nix-config/flakes/#($shell)" --command bash -c $"($command)"}
+            }
+          }
+        }
+
+        def edit [file: path] {
+          match ($file | path parse | get extension) {
+            "rs" => {
+              flake rust -c $"nvim ($file)"
+            }
+            "c" | "c++" => {
+              flake c -c $"nvim ($file)"
+            }
+            _ => {nvim $file}
+          }
+        }
       '';
 
       settings = {
@@ -43,7 +70,7 @@
       shellAliases = {
         zel = "zellij";
         rebuild = "sudo nixos-rebuild switch --flake /home/maxag/.nix-config";
-        flake = "nvim /home/maxag/.nix-config/flake.nix";
+        system = "nvim /home/maxag/.nix-config/flake.nix";
         home = "nvim /home/maxag/.nix-config/home/home.nix";
         config = "nvim /home/maxag/.nix-config/configuration/configuration.nix";
         projects = "cd /mnt/removable/Projekty";

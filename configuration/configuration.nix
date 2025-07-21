@@ -13,7 +13,6 @@
     config.allowUnfree = true;
 
     overlays = [
-      inputs.rust-overlay.overlays.default
       inputs.dolphin-overlay.overlays.default
     ];
   };
