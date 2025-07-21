@@ -31,8 +31,8 @@
       c-sharp = pkgs.mkShell {
         buildInputs = with pkgs; [
           dotnetCorePackages.sdk_9_0-bin
-        ]
-      }
+        ];
+      };
       rice = pkgs.mkShell {
         buildInputs = with pkgs; [
           cmatrix

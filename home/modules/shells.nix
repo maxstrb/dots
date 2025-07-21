@@ -55,7 +55,7 @@
             "rs" => {
               flake rust -c $"nvim ($file)"
             }
-            "c" | "c++" => {
+            "c" | "cpp" => {
               flake c -c $"nvim ($file)"
             }
             _ => {nvim $file}
@@ -75,8 +75,19 @@
         config = "nvim /home/maxag/.nix-config/configuration/configuration.nix";
         projects = "cd /mnt/removable/Projekty";
         cat = "bat -p -P";
+        nvim = "edit";
         nix-shell = "nix-shell --run nu";
       };
+    };
+
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableNushellIntegration = true;
+
+      options = [
+        "--cmd cd"
+      ];
     };
   };
 }

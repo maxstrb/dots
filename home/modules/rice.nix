@@ -62,18 +62,13 @@
 
     git = {
       enable = true;
-
+      package = pkgs.gitFull;
+      userName = "maxstrb";
       userEmail = "max.stribrny@gmail.com";
-      userName = "max_ag";
-
       extraConfig = {
-        credential.helper = "${
-          pkgs.git.override {withLibsecret = true;}
-        }/bin/git-credential-libsecret";
-
-        push = {autoSetupRemote = true;};
-
         init.defaultBranch = "main";
+        github.user = "maxstrb";
+        credential.helper = "store";
       };
     };
 
