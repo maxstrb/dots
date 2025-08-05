@@ -17,6 +17,5 @@
     ./modules/communication.nix
     ./modules/rice.nix
     ./modules/shells.nix
-    ./modules/zen.nix
   ];
 }

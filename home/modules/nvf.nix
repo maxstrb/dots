@@ -14,6 +14,7 @@
       lsp = {
         enable = true;
 
+        inlayHints.enable = true;
         formatOnSave = true;
         lspkind.enable = true;
         lspsaga.enable = false;
@@ -125,5 +126,14 @@
         fastaction.enable = true;
       };
     };
+  };
+
+  xdg.desktopEntries.nvim-foot = {
+    name = "Neovim (foot)";
+    comment = "Edit text files with Neovim in foot terminal";
+    icon = "nvim";
+    exec = "foot -e nvim %F";
+    categories = ["Utility" "TextEditor" "Development"];
+    mimeType = ["text/plain" "text/x-makefile" "application/x-shellscript"];
   };
 }

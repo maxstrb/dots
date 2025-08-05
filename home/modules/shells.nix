@@ -71,9 +71,8 @@
         zel = "zellij";
         rebuild = "sudo nixos-rebuild switch --flake /home/maxag/.nix-config";
         system = "nvim /home/maxag/.nix-config/flake.nix";
-        home = "nvim /home/maxag/.nix-config/home/home.nix";
-        config = "nvim /home/maxag/.nix-config/configuration/configuration.nix";
-        projects = "cd /mnt/removable/Projekty";
+        home = "nvim /home/maxag/.nix-config/home/main/home.nix";
+        config = "nvim /home/maxag/.nix-config/configuration/main/configuration.nix";
         cat = "bat -p -P";
         nvim = "edit";
         nix-shell = "nix-shell --run nu";

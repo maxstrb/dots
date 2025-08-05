@@ -2,6 +2,11 @@
   stylix = {
     enable = true;
 
+    targets = {
+      gtk.enable = true;
+      qt.enable = true;
+    };
+
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     base16Scheme = {
@@ -56,5 +61,18 @@
     polarity = "dark";
 
     image = ../../assets/shadow_dark.png;
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    gtk3.extraConfig = {
+      gtk-recent-files-enabled = 0;
+      gtk-recent-files-limit = 0;
+      gtk-recent-files-max-age = 0;
+    };
   };
 }

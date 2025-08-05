@@ -98,10 +98,11 @@
         "$mainMod, W, togglefloating"
         "$mainMod, A, exec, fuzzel"
         "$mainMod, P, pseudo,"
-        "$mainMod, E, exec, dolphin"
+        "$mainMod, E, exec, thunar"
         "$mainMod, C, exec, hyprpicker -a"
         "$mainMod, code:23, swapsplit"
         "$mainMod, code:66, togglesplit"
+        "Alt, F4, exec, hyprctl kill"
 
         # switch focus
         "$mainMod, left,  movefocus, l"

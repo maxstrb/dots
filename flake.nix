@@ -4,7 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nvf.url = "github:notashelf/nvf";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,11 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    dolphin-overlay.url = "github:rumboon/dolphin-overlay";
-
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {nixpkgs, ...} @ inputs: {
@@ -31,8 +33,8 @@
       };
 
       modules = [
-        ./configuration/configuration.nix
-        ./configuration/hardware-configuration.nix
+        ./configuration/main/configuration.nix
+        ./configuration/main/hardware-configuration.nix
 
         inputs.home-manager.nixosModules.default
         {
@@ -43,7 +45,39 @@
             extraSpecialArgs = {inherit inputs;};
             backupFileExtension = "backup_nix";
 
-            users.maxag = ./home/home.nix;
+            users.maxag = ./home/main/home.nix;
+          };
+        }
+
+        inputs.stylix.nixosModules.stylix
+        {
+          home-manager.sharedModules = [
+            inputs.stylix.homeModules.stylix
+          ];
+        }
+      ];
+    };
+
+    nixosConfigurations.server = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+      };
+
+      modules = [
+        ./configuration/main/configuration.nix.nix
+        ./configuration/main/hardware-configuration.nix.nix
+
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            useUserPackages = true;
+            useGlobalPkgs = true;
+
+            extraSpecialArgs = {inherit inputs;};
+            backupFileExtension = "backup_nix";
+
+            users.maxag = ./home/main/home.nix;
           };
         }
 

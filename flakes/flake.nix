@@ -6,6 +6,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zig.url = "github:mitchellh/zig-overlay";
   };
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
@@ -21,18 +22,28 @@
           gnumake
         ];
       };
+
       rust = pkgs.mkShell {
         buildInputs = with pkgs; [
           gcc
           gnumake
           rust-bin.beta.latest.default
+          evcxr
         ];
       };
+
+      zig = pkgs.mkShell {
+        buildInputs = [
+          inputs.zig.packages.${system}.master
+        ];
+      };
+
       c-sharp = pkgs.mkShell {
         buildInputs = with pkgs; [
           dotnetCorePackages.sdk_9_0-bin
         ];
       };
+
       rice = pkgs.mkShell {
         buildInputs = with pkgs; [
           cmatrix
@@ -40,6 +51,7 @@
           lavat
           cbonsai
           pipes
+          cava
         ];
       };
     };

@@ -11,10 +11,6 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-
-    overlays = [
-      inputs.dolphin-overlay.overlays.default
-    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -42,6 +38,14 @@
   programs = {
     firefox.enable = true;
     bash.blesh.enable = true;
+    xfconf.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
 
     hyprland = {
       enable = true;
@@ -56,6 +60,13 @@
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
     };
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Add libraries here
+      ];
+    };
   };
 
   boot = {
@@ -64,7 +75,8 @@
       efi.canTouchEfiVariables = true;
     };
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
   };
 
   networking = {
@@ -79,6 +91,7 @@
 
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
+    TERMINAL = "foot";
   };
 
   time.timeZone = "Europe/Prague";
@@ -108,6 +121,7 @@
       };
     };
 
+    tumbler.enable = true;
     printing.enable = true;
 
     displayManager.sddm = {
