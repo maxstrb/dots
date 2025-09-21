@@ -26,15 +26,16 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: {
-    nixosConfigurations.max-main = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = {
-        inherit inputs;
-      };
+    nixosConfigurations = {
+      max-laptop = {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
 
-      modules = [
-        ./configuration/main/configuration.nix
-        ./configuration/main/hardware-configuration.nix
+        modules = [
+          ./configuration/laptop/configuration.nix
+          ./configuration/laptop/hardware-configuration.nix
 
         inputs.home-manager.nixosModules.default
         {
@@ -56,6 +57,39 @@
           ];
         }
       ];
-    };
+
+      };
+
+      max-main = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+        };
+
+        modules = [
+          ./configuration/main/configuration.nix
+          ./configuration/main/hardware-configuration.nix
+
+        inputs.home-manager.nixosModules.default
+        {
+          home-manager = {
+            useUserPackages = true;
+            useGlobalPkgs = true;
+
+            extraSpecialArgs = {inherit inputs;};
+            backupFileExtension = "backup_nix";
+
+            users.maxag = ./home/main/home.nix;
+          };
+        }
+
+        inputs.stylix.nixosModules.stylix
+        {
+          home-manager.sharedModules = [
+            inputs.stylix.homeModules.stylix
+          ];
+        }
+      ];
+    };};
   };
 }
