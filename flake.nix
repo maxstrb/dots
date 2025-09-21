@@ -37,27 +37,26 @@
           ./configuration/laptop/configuration.nix
           ./configuration/laptop/hardware-configuration.nix
 
-        inputs.home-manager.nixosModules.default
-        {
-          home-manager = {
-            useUserPackages = true;
-            useGlobalPkgs = true;
+          inputs.home-manager.nixosModules.default
+          {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
 
-            extraSpecialArgs = {inherit inputs;};
-            backupFileExtension = "backup_nix";
+              extraSpecialArgs = {inherit inputs;};
+              backupFileExtension = "backup_nix";
 
-            users.maxag = ./home/main/home.nix;
-          };
-        }
+              users.maxag = ./home/laptop/home.nix;
+            };
+          }
 
-        inputs.stylix.nixosModules.stylix
-        {
-          home-manager.sharedModules = [
-            inputs.stylix.homeModules.stylix
-          ];
-        }
-      ];
-
+          inputs.stylix.nixosModules.stylix
+          {
+            home-manager.sharedModules = [
+              inputs.stylix.homeModules.stylix
+            ];
+          }
+        ];
       };
 
       max-main = nixpkgs.lib.nixosSystem {
@@ -70,26 +69,27 @@
           ./configuration/main/configuration.nix
           ./configuration/main/hardware-configuration.nix
 
-        inputs.home-manager.nixosModules.default
-        {
-          home-manager = {
-            useUserPackages = true;
-            useGlobalPkgs = true;
+          inputs.home-manager.nixosModules.default
+          {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
 
-            extraSpecialArgs = {inherit inputs;};
-            backupFileExtension = "backup_nix";
+              extraSpecialArgs = {inherit inputs;};
+              backupFileExtension = "backup_nix";
 
-            users.maxag = ./home/main/home.nix;
-          };
-        }
+              users.maxag = ./home/main/home.nix;
+            };
+          }
 
-        inputs.stylix.nixosModules.stylix
-        {
-          home-manager.sharedModules = [
-            inputs.stylix.homeModules.stylix
-          ];
-        }
-      ];
-    };};
+          inputs.stylix.nixosModules.stylix
+          {
+            home-manager.sharedModules = [
+              inputs.stylix.homeModules.stylix
+            ];
+          }
+        ];
+      };
+    };
   };
 }
