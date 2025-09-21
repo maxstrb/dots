@@ -27,7 +27,7 @@
 
   outputs = {nixpkgs, ...} @ inputs: {
     nixosConfigurations = {
-      max-laptop = {
+      max-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
