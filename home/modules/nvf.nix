@@ -11,6 +11,13 @@
     enable = true;
 
     settings.vim = {
+      theme = {
+        enable = true;
+        transparent = true;
+
+        name = "catppuccin";
+        style = "mocha";
+      };
       lsp = {
         enable = true;
 

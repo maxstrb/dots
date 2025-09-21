@@ -63,9 +63,9 @@
 
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [
-        # Add libraries here
-      ];
+      #libraries = with pkgs; [
+      # Add libraries here
+      #];
     };
   };
 
@@ -75,8 +75,8 @@
       efi.canTouchEfiVariables = true;
     };
 
-    #kernelPackages = pkgs.linuxPackages_latest;
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
+    #kernelPackages = pkgs.linuxPackages_zen;
   };
 
   networking = {
@@ -123,6 +123,7 @@
 
     tumbler.enable = true;
     printing.enable = true;
+    avahi.enable = true;
 
     displayManager.sddm = {
       enable = true;
@@ -152,7 +153,7 @@
   users.users.maxag = {
     isNormalUser = true;
     description = "Max Ag";
-    extraGroups = ["networkmanager" "wheel" "video"];
+    extraGroups = ["networkmanager" "wheel" "video" "input"];
 
     shell = pkgs.nushell;
   };

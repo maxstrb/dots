@@ -136,16 +136,27 @@
         "$mainMod, code:19, workspace, 10"
 
         # same as above, but switch to the workspace
-        "$mainMod SHIFT, code:10, movetoworkspacesilent, 1"
-        "$mainMod SHIFT, code:11, movetoworkspacesilent, 2"
-        "$mainMod SHIFT, code:12, movetoworkspacesilent, 3"
-        "$mainMod SHIFT, code:13, movetoworkspacesilent, 4"
-        "$mainMod SHIFT, code:14, movetoworkspacesilent, 5"
-        "$mainMod SHIFT, code:15, movetoworkspacesilent, 6"
-        "$mainMod SHIFT, code:16, movetoworkspacesilent, 7"
-        "$mainMod SHIFT, code:17, movetoworkspacesilent, 8"
-        "$mainMod SHIFT, code:18, movetoworkspacesilent, 9"
-        "$mainMod SHIFT, code:19, movetoworkspacesilent, 10"
+        "$mainMod SHIFT, code:10, movetoworkspace, 1"
+        "$mainMod SHIFT, code:11, movetoworkspace, 2"
+        "$mainMod SHIFT, code:12, movetoworkspace, 3"
+        "$mainMod SHIFT, code:13, movetoworkspace, 4"
+        "$mainMod SHIFT, code:14, movetoworkspace, 5"
+        "$mainMod SHIFT, code:15, movetoworkspace, 6"
+        "$mainMod SHIFT, code:16, movetoworkspace, 7"
+        "$mainMod SHIFT, code:17, movetoworkspace, 8"
+        "$mainMod SHIFT, code:18, movetoworkspace, 9"
+        "$mainMod SHIFT, code:19, movetoworkspace, 10"
+
+        "$mainMod ALT, code:10, movetoworkspacesilent, 1"
+        "$mainMod ALT, code:11, movetoworkspacesilent, 2"
+        "$mainMod ALT, code:12, movetoworkspacesilent, 3"
+        "$mainMod ALT, code:13, movetoworkspacesilent, 4"
+        "$mainMod ALT, code:14, movetoworkspacesilent, 5"
+        "$mainMod ALT, code:15, movetoworkspacesilent, 6"
+        "$mainMod ALT, code:16, movetoworkspacesilent, 7"
+        "$mainMod ALT, code:17, movetoworkspacesilent, 8"
+        "$mainMod ALT, code:18, movetoworkspacesilent, 9"
+        "$mainMod ALT, code:19, movetoworkspacesilent, 10"
 
         # window control
         "$mainMod SHIFT, left, movewindow, l"
@@ -216,6 +227,8 @@
       bar = {
         launcher.autoDetectIcon = true;
 
+        clock.format = "%d %b  %H:%M";
+
         workspaces.show_numbered = true;
 
         layouts = {
@@ -238,7 +251,7 @@
       menus.clock = {
         time = {
           military = true;
-          hideSeconds = true;
+          hideSeconds = false;
         };
         weather.enabled = false;
       };

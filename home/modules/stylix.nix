@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   stylix = {
     enable = true;
+    overlays.enable = false;
 
     targets = {
       gtk.enable = true;
@@ -28,6 +29,12 @@
       base0F = "f2cdcd"; # flamingo
     };
 
+    opacity.terminal = 0.75;
+
+    targets.nvf = {
+      enable = false;
+    };
+
     cursor = {
       package = pkgs.bibata-cursors;
       name = "Bibata-Modern-Ice";
@@ -44,7 +51,7 @@
 
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font Mono";
+        name = "JetBrainsMono Nerd Font";
       };
 
       sansSerif = {

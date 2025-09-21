@@ -3,7 +3,7 @@
     packages = with pkgs; [
       libreoffice
       xarchiver
-      trilium-next-desktop
+      trilium-desktop
       krita
       libresprite
       mpv

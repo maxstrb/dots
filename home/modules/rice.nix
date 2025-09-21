@@ -38,13 +38,13 @@
           "os"
           "kernel"
           "cpu"
-          "memory"
           {
             type = "gpu";
             key = "GPU";
             detectionMethod = "pci";
             hideType = "integrated";
           }
+          "memory"
           "wm"
           "terminal"
           "shell"
@@ -55,8 +55,13 @@
 
     foot = {
       enable = true;
-      settings.main = {
-        term = "xterm-256color";
+      settings = {
+        main = {
+          term = "xterm-256color";
+        };
+        #colors = {
+        #  alpha = "0.85";
+        #};
       };
     };
 

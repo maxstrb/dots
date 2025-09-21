@@ -55,8 +55,14 @@
             "rs" => {
               flake rust -c $"nvim ($file)"
             }
+            "zig" => {
+              flake zig -c $"nvim ($file)"
+            }
             "c" | "cpp" => {
               flake c -c $"nvim ($file)"
+            }
+            "cs" => {
+              flake c-sharp -c $"nvim ($file)"
             }
             _ => {nvim $file}
           }

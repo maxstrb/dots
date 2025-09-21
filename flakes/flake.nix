@@ -6,7 +6,7 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zig.url = "github:mitchellh/zig-overlay";
+    #zig.url = "github:mitchellh/zig-overlay";
   };
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
@@ -33,8 +33,8 @@
       };
 
       zig = pkgs.mkShell {
-        buildInputs = [
-          inputs.zig.packages.${system}.master
+        buildInputs = with pkgs; [
+          zig
         ];
       };
 
