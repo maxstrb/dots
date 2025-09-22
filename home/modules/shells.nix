@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  name,
+  ...
+}: {
   home.packages = with pkgs; [
     bat
   ];
@@ -14,8 +18,6 @@
       enable = true;
 
       extraConfig = ''
-        $env.config.buffer_editor = "nvim"
-
         if "ZELLIJ" in $env == false {
           zellij
           exit
@@ -77,8 +79,8 @@
         zel = "zellij";
         rebuild = "sudo nixos-rebuild switch --flake /home/maxag/.nix-config";
         system = "nvim /home/maxag/.nix-config/flake.nix";
-        home = "nvim /home/maxag/.nix-config/home/main/home.nix";
-        config = "nvim /home/maxag/.nix-config/configuration/main/configuration.nix";
+        home = "nvim /home/maxag/.nix-config/home/${name}/home.nix";
+        config = "nvim /home/maxag/.nix-config/configuration/${name}/configuration.nix";
         cat = "bat -p -P";
         nvim = "edit";
         nix-shell = "nix-shell --run nu";

@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   home = {
     username = "maxag";
     homeDirectory = "/home/maxag";
@@ -6,6 +6,10 @@
   };
 
   programs.home-manager.enable = true;
+
+  home.packages = with pkgs; [
+    brightnessctl
+  ];
 
   imports = [
     ./hyprland.nix

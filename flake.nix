@@ -3,93 +3,54 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = {nixpkgs, ...} @ inputs: {
+  outputs = {nixpkgs, ...} @ inputs: let
+    mkSystem = name:
+      nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs name;
+        };
+        modules = [
+          ./configuration/${name}/configuration.nix
+          ./configuration/${name}/hardware-configuration.nix
+          inputs.home-manager.nixosModules.default
+          inputs.stylix.nixosModules.stylix
+          {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              extraSpecialArgs = {inherit inputs name;};
+              backupFileExtension = "backup_nix";
+              users.maxag = ./home/${name}/home.nix;
+              sharedModules = [
+                inputs.stylix.homeModules.stylix
+              ];
+            };
+          }
+        ];
+      };
+  in {
     nixosConfigurations = {
-      max-laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-
-        modules = [
-          ./configuration/laptop/configuration.nix
-          ./configuration/laptop/hardware-configuration.nix
-
-          inputs.home-manager.nixosModules.default
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-
-              extraSpecialArgs = {inherit inputs;};
-              backupFileExtension = "backup_nix";
-
-              users.maxag = ./home/laptop/home.nix;
-            };
-          }
-
-          inputs.stylix.nixosModules.stylix
-          {
-            home-manager.sharedModules = [
-              inputs.stylix.homeModules.stylix
-            ];
-          }
-        ];
-      };
-
-      max-main = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-        };
-
-        modules = [
-          ./configuration/main/configuration.nix
-          ./configuration/main/hardware-configuration.nix
-
-          inputs.home-manager.nixosModules.default
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-
-              extraSpecialArgs = {inherit inputs;};
-              backupFileExtension = "backup_nix";
-
-              users.maxag = ./home/main/home.nix;
-            };
-          }
-
-          inputs.stylix.nixosModules.stylix
-          {
-            home-manager.sharedModules = [
-              inputs.stylix.homeModules.stylix
-            ];
-          }
-        ];
-      };
+      max-laptop = mkSystem "laptop";
+      max-main = mkSystem "main";
     };
   };
 }
