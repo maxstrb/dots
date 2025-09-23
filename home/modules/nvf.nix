@@ -18,7 +18,9 @@
         name = "catppuccin";
         style = "mocha";
       };
+
       lsp = {
+        null-ls.enable = false;
         enable = true;
 
         inlayHints.enable = true;
@@ -60,15 +62,19 @@
         nix.enable = true;
         markdown.enable = true;
 
+        nu.enable = true;
+        bash.enable = true;
+
         css.enable = true;
         html.enable = true;
+
         sql.enable = true;
         ts.enable = true;
         zig.enable = true;
         csharp.enable = true;
         rust = {
           enable = true;
-          crates.enable = true;
+          crates.enable = false; #null-ls was making me angry
         };
       };
 

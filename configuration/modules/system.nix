@@ -1,5 +1,5 @@
-{name, ...}: {
-  networking.hostName = "max-${name}";
+{device-name, ...}: {
+  networking.hostName = "max-${device-name}";
   system = {
     stateVersion = "25.11";
     activationScripts.cleanBackups = ''

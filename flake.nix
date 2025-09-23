@@ -22,24 +22,24 @@
   };
 
   outputs = {nixpkgs, ...} @ inputs: let
-    mkSystem = name:
+    mkSystem = device-name:
       nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit inputs name;
+          inherit inputs device-name;
         };
         modules = [
-          ./configuration/${name}/configuration.nix
-          ./configuration/${name}/hardware-configuration.nix
+          ./configuration/${device-name}/configuration.nix
+          ./configuration/${device-name}/hardware-configuration.nix
           inputs.home-manager.nixosModules.default
           inputs.stylix.nixosModules.stylix
           {
             home-manager = {
               useUserPackages = true;
               useGlobalPkgs = true;
-              extraSpecialArgs = {inherit inputs name;};
+              extraSpecialArgs = {inherit inputs device-name;};
               backupFileExtension = "backup_nix";
-              users.maxag = ./home/${name}/home.nix;
+              users.maxag = ./home/${device-name}/home.nix;
               sharedModules = [
                 inputs.stylix.homeModules.stylix
               ];

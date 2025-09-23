@@ -26,7 +26,7 @@
 
         sensitivity = 0;
         touchpad = {
-          natural_scroll = true;
+          natural_scroll = false;
         };
       };
 
@@ -177,15 +177,6 @@
         "$mainMod CTRL, k, resizeactive, 0 -80"
         "$mainMod CTRL, l, resizeactive, 80 0"
 
-        "$mainMod ALT, left, moveactive,  -80 0"
-        "$mainMod ALT, right, moveactive, 80 0"
-        "$mainMod ALT, up, moveactive, 0 -80"
-        "$mainMod ALT, down, moveactive, 0 80"
-        "$mainMod ALT, h, moveactive,  -80 0"
-        "$mainMod ALT, j, moveactive, 0 80"
-        "$mainMod ALT, k, moveactive, 0 -80"
-        "$mainMod ALT, l, moveactive, 80 0"
-
         # media and volume controls
         # ",XF86AudioMute,exec, pamixer -t"
         ",XF86AudioPlay,exec, playerctl play-pause"
@@ -203,21 +194,7 @@
       windowrule = [
         # "float,class:^(mpv)$"
       ];
-
-      workspace = [
-        "1, monitor:DP-1"
-        "2, monitor:DP-2"
-      ];
     };
-
-    extraConfig = "
-      monitor=DP-1,2560x1440@120,0x0,1
-      monitor=DP-2,1920x1080@60,-1920x300,1
-
-      xwayland {
-        force_zero_scaling = true
-      }
-    ";
   };
 
   programs.hyprpanel = {
@@ -230,22 +207,6 @@
         clock.format = "%d %b  %H:%M";
 
         workspaces.show_numbered = true;
-
-        layouts = {
-          "*" = {
-            left = [
-              "dashboard"
-              "workspaces"
-            ];
-            middle = [];
-            right = [
-              "volume"
-              "clock"
-              "systray"
-              "notifications"
-            ];
-          };
-        };
       };
 
       menus.clock = {
@@ -279,6 +240,14 @@
       theme.bar.menus.menu.clock.calendar.paginator = "#88B1F7";
       theme.bar.menus.menu.clock.calendar.currentday = "#88B1F7";
       theme.bar.buttons.notifications.icon = "#88B1F7";
+      theme.bar.battery.icon = "#88B1F7";
+
+      theme.bar.buttons.battery.text = "#88B1F7";
+      theme.bar.buttons.battery.icon = "#88B1F7";
+      theme.bar.menus.menu.battery.label.color = "#88B1F7";
+      theme.bar.menus.menu.battery.slider.primary = "#88B1F7";
+      theme.bar.menus.menu.battery.listitems.active = "#88B1F7";
+      theme.bar.menus.menu.battery.icons.active = "#88B1F7";
 
       theme.bar.menus.menu.volume = {
         label.color = "#88B1F7";
@@ -308,5 +277,6 @@
     slurp
     grim
     wl-clipboard
+    playerctl
   ];
 }

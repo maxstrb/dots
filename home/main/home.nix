@@ -8,7 +8,7 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ../modules/hyprland.nix
+    ./hyprland.nix
     ../modules/nvf.nix
     ../modules/stylix.nix
     ../modules/games.nix

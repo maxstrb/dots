@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  device-name,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -39,7 +40,7 @@
     };
     displayManager.sddm = {
       enable = true;
-      theme = "${import ./sddm-theme.nix {inherit pkgs;}}";
+      theme = "${import ../${device-name}/sddm-theme.nix {inherit pkgs;}}";
       autoNumlock = true;
     };
   };
