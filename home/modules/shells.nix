@@ -77,8 +77,11 @@
           def rebuild [message?: string] {
             cd /home/maxag/.nix-config
             let commit_message = if $message != null {$message} else {"non important commit"}
-            git add .
-            git commit -m $commit_message
+
+            try {
+              git add .
+              git commit -m $commit_message
+            }
 
             sudo nixos-rebuild switch --flake .
           }
