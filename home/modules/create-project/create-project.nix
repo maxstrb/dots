@@ -36,7 +36,7 @@
         mkdir $name
         cd $name
 
-        if (ls $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" | length) > 0 {
+        if (ls $"~/.nix-config/home/modules/create-project/project-blueprints/($type)" | length) > 0 {
           cp $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" .
         }
 
