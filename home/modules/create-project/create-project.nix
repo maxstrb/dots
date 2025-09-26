@@ -36,7 +36,9 @@
         mkdir $name
         cd $name
 
-        cp $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" .
+        if (ls $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" | length) > 0 {
+          cp $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" .
+        }
 
         if ($"./init.sh" | path type) == "file" {
           bash "init.sh"
