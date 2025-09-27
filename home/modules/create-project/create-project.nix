@@ -37,7 +37,7 @@
         cd $name
 
         if ($"~/.nix-config/home/modules/create-project/project-blueprints/($type)" | path expand | ls $in | length) > 0 {
-          glob $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" | cp $in .
+          glob $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" | each { |file| cp $file . }
         }
 
         if ($"./init.sh" | path type) == "file" {
