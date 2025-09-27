@@ -68,13 +68,15 @@
         css.enable = true;
         html.enable = true;
 
+        python.enable = true;
+
         sql.enable = true;
         ts.enable = true;
         zig.enable = true;
         csharp.enable = true;
         rust = {
           enable = true;
-          crates.enable = false; #null-ls was making me angry
+          crates.enable = false;
         };
       };
 

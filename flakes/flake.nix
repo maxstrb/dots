@@ -44,6 +44,15 @@
         ];
       };
 
+      python = pkgs.mkShell {
+        packages = [
+          (pkgs.python3.withPackages (python-pkgs: [
+            python-pkgs.numpy
+            python-pkgs.pandas
+          ]))
+        ];
+      };
+
       rice = pkgs.mkShell {
         buildInputs = with pkgs; [
           cmatrix
