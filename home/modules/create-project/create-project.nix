@@ -49,10 +49,7 @@
           exit 0
         }
 
-        print "Enter server password:"
-        let pass = (input --suppress-output)
-
-        ssh $"admin@silvers.fun" $"echo '($pass)' | sudo -S -u git git init --bare ~/($name).git"
+        ssh $"admin@silvers.fun" $"sudo -S -u git git init --bare ~/($name).git"
         print $"Repository ($name) created successfully!"
 
         git init
