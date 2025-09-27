@@ -41,7 +41,7 @@
         }
 
         if ($"./init.sh" | path type) == "file" {
-          bash "init.sh"
+          bash "init.sh ($name)"
           rm "init.sh"
         }
 

@@ -27,7 +27,7 @@
         buildInputs = with pkgs; [
           gcc
           gnumake
-          rust-bin.beta.latest.default
+          rust-bin.stable.latest.default
           evcxr
         ];
       };
