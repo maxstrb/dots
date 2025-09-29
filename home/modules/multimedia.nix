@@ -4,6 +4,7 @@
       libreoffice
       xarchiver
       trilium-desktop
+      xournalpp
       krita
       libresprite
       mpv
