@@ -12,7 +12,6 @@
           name?: string
           --local (-l)
         ] {
-
         if $name == null or $type == null {
           print "Usage: create-project <name> <type> [Options: -l]"
           exit 1
@@ -35,6 +34,8 @@
 
         mkdir $name
         cd $name
+
+        pwd
 
         if ($"~/.nix-config/home/modules/create-project/project-blueprints/($type)" | path expand | ls $in | length) > 0 {
           glob $"~/.nix-config/home/modules/create-project/project-blueprints/($type)/*" | each { |file| cp $file . }
