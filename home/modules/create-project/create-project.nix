@@ -8,8 +8,8 @@
         #!${pkgs.nushell}/bin/nu
 
         def main [
-          name?: string
           type?: string
+          name?: string
           --local (-l)
         ] {
 
