@@ -51,13 +51,13 @@
         }
 
         ssh $"admin@silvers.fun" $"sudo -S -u git git init --bare ~/($name).git"
-        print $"Repository ($name) created successfully!"
+        #print $"Repository ($name) created successfully!"
 
-        git init .
-        git add .
-        git commit -m "Project setup"
-        git $"remote add origin git@silvers.fun:($name).git"
-        git push origin main
+        #git init .
+        #git add .
+        #git commit -m "Project setup"
+        #git $"remote add origin git@silvers.fun:($name).git"
+        #git push origin main
 
         print "You are all done"
 
