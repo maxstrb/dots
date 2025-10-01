@@ -46,24 +46,27 @@
               pwd
             } else {
               $user_file
-            } | path expand
+            }
 
             let git_result = do { git rev-parse --show-toplevel } | complete
-            if $git_result.exit_code == 0 {
-              let root = $git_result.stdout | str trim
-              let flake_path = $root | path join "flake.nix"
 
-              if not ($flake_path | path exists) {
-                nvim $file
-                print $file
-                return
-              }
-              cd $root
-              nix develop . --command nvim $file
-              print $file
-            } else {
+            if $git_result.exit_code != 0 {
               nvim $file
-              print $file
+              return
+            }
+
+            let root = $git_result.stdout | str trim
+            let flake_path = $root | path join "flake.nix"
+
+            if not ($flake_path | path exists) {
+              nvim $file
+              return
+            }
+
+            if ($user_file | is-empty) {
+              nix develop $root --command nvim
+            } else {
+              nix develop $root --command nvim $file
             }
           }
 
