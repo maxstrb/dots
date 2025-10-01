@@ -43,10 +43,10 @@
 
           def edit [user_file?: path] {
             let file = if ($user_file | is-empty) {
-              "."
+              pwd
             } else {
               $user_file
-            }
+            } | path parse | path expand
 
             let git_result = do { git rev-parse --show-toplevel } | complete
             if $git_result.exit_code == 0 {
