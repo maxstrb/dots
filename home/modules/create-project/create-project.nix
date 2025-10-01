@@ -51,6 +51,10 @@
           exit 0
         }
 
+        git init
+        git add .
+        git commit -m "Project setup"
+
         print "You are all done"
 
         exit 0
