@@ -52,12 +52,15 @@
             if $git_result.exit_code == 0 {
               let root = $git_result.stdout | str trim
               let flake_path = $root | path join "flake.nix"
+
               if not ($flake_path | path exists) {
                 nvim $file
                 return
               }
               cd $root
               nix develop . --command nvim $file
+
+              print "Please"
             } else {
               nvim $file
             }
