@@ -72,6 +72,7 @@
       userEmail = "max.stribrny@gmail.com";
       extraConfig = {
         init.defaultBranch = "main";
+        push.autoSetupRemote = true;
         github.user = "maxstrb";
         credential.helper = "store";
       };
