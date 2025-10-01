@@ -59,6 +59,7 @@
               }
               cd $root
               nix develop . --command nvim $file
+              print $file
             } else {
               nvim $file
             }
