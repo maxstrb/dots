@@ -46,7 +46,7 @@
               pwd
             } else {
               $user_file
-            } | path parse | path expand
+            } | path expand
 
             let git_result = do { git rev-parse --show-toplevel } | complete
             if $git_result.exit_code == 0 {
