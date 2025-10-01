@@ -41,32 +41,26 @@
             fastfetch
           }
 
-          def flake [
-            shell?: string
-            --edit (-e)
-            --command (-c): string
-          ] {
-            if $edit {
-              nvim ~/.nix-config/flakes/flake.nix
-            } else {
-              match $command {
-                null => {nix develop $"/home/maxag/.nix-config/flakes/#($shell)"}
-                _ => {nix develop $"/home/maxag/.nix-config/flakes/#($shell)" --command bash -c $"($command)"}
-              }
+          def edit [file?: path] {
+            if ($file | is-empty) or ($file == null) {
+              $file = pwd
             }
-          }
 
-          def edit [file: path] {
-            let result = do {
-              git rev-parse --show-toplevel
-            } | complete
+            let git_result = do { git rev-parse --show-toplevel } | complete
 
-            if $result.exit_code == 0 {
-              let root = $result.stdout | str trim
-              cd root
+            if $git_result.exit_code == 0 {
+              let root = $git_result.stdout | str trim
+
+              let flake_path = $root | path join "flake.nix"
+              if not ($flake_path | path exists) {
+                nvim $file
+                return
+              }
+
+              cd $root
               nix develop . --command bash -c $"nvim ($file)"
             } else {
-              nvim file
+                nvim $file
             }
           }
 
