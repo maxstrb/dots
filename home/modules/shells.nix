@@ -55,6 +55,8 @@
 
               if not ($flake_path | path exists) {
                 nvim $file
+
+                print "wtf dude"
                 return
               }
               cd $root
@@ -63,6 +65,7 @@
               print "Please"
             } else {
               nvim $file
+               print "NOOOO"
             }
           }
 
