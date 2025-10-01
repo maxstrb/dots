@@ -49,7 +49,6 @@
             }
 
             let git_result = do { git rev-parse --show-toplevel } | complete
-
             if $git_result.exit_code != 0 {
               nvim $file
               return
@@ -57,16 +56,22 @@
 
             let root = $git_result.stdout | str trim
             let flake_path = $root | path join "flake.nix"
-
             if not ($flake_path | path exists) {
               nvim $file
               return
             }
 
-            if ($user_file | is-empty) {
-              nix develop $root --command nvim
+            # nix develop will exit with error if no devShell exists
+            let dev_check = do { nix develop $root --command true } | complete
+
+            if $dev_check.exit_code == 0 {
+              if ($user_file | is-empty) {
+                nix develop $root --command nvim
+              } else {
+                nix develop $root --command nvim $file
+              }
             } else {
-              nix develop $root --command nvim $file
+              nvim $file
             }
           }
 
@@ -89,9 +94,9 @@
 
       shellAliases = {
         zel = "zellij";
-        system = "nvim /home/maxag/.nix-config/flake.nix";
-        home = "nvim /home/maxag/.nix-config/home/${device-name}/home.nix";
-        config = "nvim /home/maxag/.nix-config/configuration/${device-name}/configuration.nix";
+        system = "edit /home/maxag/.nix-config/flake.nix";
+        home = "edit /home/maxag/.nix-config/home/${device-name}/home.nix";
+        config = "edit /home/maxag/.nix-config/configuration/${device-name}/configuration.nix";
         cat = "bat -p -P";
         nvim = "edit";
         nix-shell = "nix-shell --run nu";
