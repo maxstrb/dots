@@ -41,26 +41,29 @@
             fastfetch
           }
 
-          def edit [file?: path] {
-            if ($file | is-empty) or ($file == null) {
-              $file = pwd
+          def edit [user_file?: path] {
+            let file = if ($user_file | is-empty) or ($user_file == null) {
+              pwd
+            } else {
+              $user_file
             }
 
             let git_result = do { git rev-parse --show-toplevel } | complete
 
             if $git_result.exit_code == 0 {
               let root = $git_result.stdout | str trim
-
               let flake_path = $root | path join "flake.nix"
+
               if not ($flake_path | path exists) {
                 nvim $file
                 return
               }
 
               cd $root
-              nix develop . --command bash -c $"nvim ($file)"
+              # Pass nvim directly as the command instead of wrapping in bash -c
+              nix develop . --command nvim $file
             } else {
-                nvim $file
+              nvim $file
             }
           }
 
