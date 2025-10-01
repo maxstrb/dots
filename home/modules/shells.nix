@@ -57,20 +57,16 @@
           }
 
           def edit [file: path] {
-            match ($file | path parse | get extension) {
-              "rs" => {
-                flake rust -c $"nvim ($file)"
-              }
-              "zig" => {
-                flake zig -c $"nvim ($file)"
-              }
-              "c" | "cpp" => {
-                flake c -c $"nvim ($file)"
-              }
-              "cs" => {
-                flake c-sharp -c $"nvim ($file)"
-              }
-              _ => {nvim $file}
+            let result = do {
+              git rev-parse --show-toplevel
+            } | complete
+
+            if $result.exit_code == 0 {
+              let root = $result.stdout | str trim
+              cd root
+              nix develop . --command bash -c $"nvim ($file)"
+            } else {
+              nvim file
             }
           }
 

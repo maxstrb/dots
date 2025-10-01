@@ -47,17 +47,9 @@
         }
 
         if $local {
+          print "You are all done"
           exit 0
         }
-
-        ssh "admin@silvers.fun" $"sudo -S -u git git init --bare /var/lib/git-server/($name).git"
-        print $"Repository ($name) created successfully!"
-
-        git init
-        git add .
-        git commit -m "Project setup"
-        git remote add origin $"git@silvers.fun:($name).git"
-        git push origin main
 
         print "You are all done"
 
