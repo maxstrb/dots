@@ -103,7 +103,7 @@
         "$mainMod, code:23, swapsplit"
         "$mainMod, code:66, togglesplit"
         "Alt, F4, exec, hyprctl kill"
-        "$mainMod, exec, hyprlock"
+        "$mainMod, L, exec, hyprlock"
 
         # switch focus
         "$mainMod, left,  movefocus, l"
