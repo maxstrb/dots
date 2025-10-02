@@ -41,6 +41,10 @@
             fastfetch
           }
 
+          def flake [command?: string] {
+
+          }
+
           def edit [user_file?: path] {
             let file = if ($user_file | is-empty) {
               pwd

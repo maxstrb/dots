@@ -21,12 +21,17 @@
     portal.enable = true;
   };
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    package = inputs.hyprland.packages."x86_64-linux".hyprland;
-    portalPackage = inputs.hyprland.packages."x86_64-linux".xdg-desktop-portal-hyprland;
+  programs = {
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      package = inputs.hyprland.packages."x86_64-linux".hyprland;
+      portalPackage = inputs.hyprland.packages."x86_64-linux".xdg-desktop-portal-hyprland;
+    };
+    hyprlock.enable = true;
   };
+
+  security.pam.services.hyprlock = {};
 
   services = {
     xserver = {
