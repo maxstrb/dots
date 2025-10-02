@@ -31,8 +31,9 @@
 
     opacity.terminal = 0.75;
 
-    targets.nvf = {
-      enable = false;
+    targets = {
+      nvf.enable = false;
+      hyprpanel.enable = false;
     };
 
     cursor = {
